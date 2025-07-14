@@ -1,0 +1,62 @@
+{
+  "name": "ajentik-mcp",
+  "version": "0.1.0",
+  "description": "Ajentik MCP (Model Context Protocol) server and client for AI-assisted development",
+  "main": "dist/index.js",
+  "bin": {
+    "ajentik-mcp": "./bin/ajentik-mcp.js"
+  },
+  "scripts": {
+    "build": "npm run build:python && npm run build:wrapper",
+    "build:python": "pip install -e . && python -m build",
+    "build:wrapper": "node scripts/build-wrapper.js",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "jest",
+    "test:integration": "node tests/integration.js",
+    "prepublishOnly": "npm run build && npm test",
+    "postinstall": "node scripts/postinstall.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "development-tools",
+    "claude",
+    "anthropic",
+    "ajentik"
+  ],
+  "author": "Ajentik Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/ajentik-context.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/ajentik-context/issues"
+  },
+  "homepage": "https://github.com/yourusername/ajentik-context#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "commander": "^11.0.0",
+    "which": "^4.0.0",
+    "chalk": "^5.3.0",
+    "ora": "^7.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "@types/node": "^20.8.0"
+  },
+  "files": [
+    "bin/",
+    "dist/",
+    "scripts/",
+    "src/",
+    "requirements.txt",
+    "pyproject.toml",
+    "README.md",
+    "LICENSE"
+  ]
+}

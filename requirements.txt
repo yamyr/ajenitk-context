@@ -1,0 +1,18 @@
+# Core dependencies
+pydantic-ai[logfire]>=0.1.0
+pydantic>=2.0
+click>=8.0
+rich>=13.0
+questionary>=2.0
+python-dotenv>=1.0
+httpx>=0.25
+typing-extensions>=4.8
+
+# Development dependencies
+pytest>=7.0
+pytest-asyncio>=0.21
+pytest-cov>=4.0
+pytest-mock>=3.0
+black>=23.0
+ruff>=0.1
+mypy>=1.0

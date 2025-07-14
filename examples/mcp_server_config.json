@@ -1,0 +1,20 @@
+{
+  "name": "ajentik-tools-server",
+  "version": "1.0.0",
+  "description": "MCP server exposing Ajentik tools",
+  "tools": [
+    "read_file",
+    "write_file",
+    "list_directory",
+    "calculator",
+    "weather_info"
+  ],
+  "security_level": "safe",
+  "transport": {
+    "type": "stdio"
+  },
+  "metadata": {
+    "author": "Ajentik Team",
+    "homepage": "https://github.com/ajentik/ajentik-context"
+  }
+}

@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  # Main MCP server with all tools
+  ajentik-mcp:
+    build: .
+    image: ajentik/mcp-server:latest
+    container_name: ajentik-mcp
+    environment:
+      - PYTHONUNBUFFERED=1
+      - AJENTIK_LOG_LEVEL=INFO
+    volumes:
+      - ./data:/data:ro  # Read-only access to data
+      - ./config:/config:ro  # Configuration files
+    command: ["ajentik", "mcp", "server", "--security", "sandboxed"]
+
+  # SSE server for web clients
+  ajentik-sse:
+    build: .
+    image: ajentik/mcp-server:latest
+    container_name: ajentik-sse
+    ports:
+      - "3000:3000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: ["ajentik", "mcp", "server", "--transport", "sse", "--port", "3000"]
+
+  # Development server with hot reload
+  ajentik-dev:
+    build: .
+    image: ajentik/mcp-server:latest
+    container_name: ajentik-dev
+    volumes:
+      - .:/app:rw  # Full access for development
+      - /app/.venv  # Exclude virtual environment
+    environment:
+      - PYTHONUNBUFFERED=1
+      - AJENTIK_LOG_LEVEL=DEBUG
+    command: ["python", "-m", "src.mcp.server_script", "--discover"]
+
+  # Tool documentation server
+  ajentik-docs:
+    build: .
+    image: ajentik/mcp-server:latest
+    container_name: ajentik-docs
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./docs:/docs
+    command: ["python", "-m", "http.server", "8000", "--directory", "/docs"]
+
+# Network for inter-service communication
+networks:
+  default:
+    name: ajentik-network
